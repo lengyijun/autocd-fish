@@ -6,7 +6,7 @@ function autocd
                     set -l splits (string split -n ' ' $history[1])
                     for i in $splits[-1..2]
                         if not string match -q -- "-*" $i
-                            commandline -t "cd $i"
+                            commandline "cd $i"
                             return
                         end
                     end
@@ -16,17 +16,17 @@ function autocd
                     for i in $splits[-1..3]
                         if string match -q "https://*" $i
                             set -l split1 (string split -n '/' $i)
-                            commandline -t "cd $split1[-1]"
+                            commandline "cd $split1[-1]"
                             return
                         end
                         if string match -q "git@*.git" $i
                             set -l last (string split '/' $i)[-1]
                             set -l dir_name (string sub --end -4 $last)
-                            commandline -t "cd $dir_name"
+                            commandline "cd $dir_name"
                             return
                         end
                         if not string match -q -- "-*" $i
-                            commandline -t "cd $i"
+                            commandline "cd $i"
                             return
                         end
                     end
